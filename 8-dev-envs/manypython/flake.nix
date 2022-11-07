@@ -14,9 +14,15 @@
       # A function to make a shell with a python version
       makePythonShell = shellName: pythonPackage: pkgs.mkShell {
         packages = [ pythonPackage ];
+        # You can also add commands that run on shell startup
+        shellHook = ''
+          echo "Now entering ${shellName} environment."
+        '';
       };
     in
     {
+      # mapAttrs runs the given function (makePythonShell) against every value
+      # in the attribute set (pythonVersions) and returns a new set
       devShells.x86_64-linux = builtins.mapAttrs makePythonShell pythonVersions;
     };
 }
