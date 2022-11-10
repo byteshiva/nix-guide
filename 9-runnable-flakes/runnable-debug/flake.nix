@@ -7,7 +7,7 @@
       pkgs = import nixpkgs { inherit system; };
     in
     {
-      debug = pkgs.stdenv.mkDerivation {
+      packages.${system}.debug = pkgs.stdenv.mkDerivation {
         src = ./rust-hello;
         name = "rust-hello-debug-1.0";
         inherit system;
